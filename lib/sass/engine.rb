@@ -326,6 +326,8 @@ END
       if directive == "import" && value !~ /^(url\(|")/
         raise SyntaxError.new("Illegal nesting: Nothing may be nested beneath import directives.", @line + 1) unless line.children.empty?
         import(value)
+      elsif directive == "raw"
+        Tree::AttrNode.new('raw', "#{value}", @options)
       elsif directive == "for"
         parse_for(line, root, value)
       elsif directive == "else"

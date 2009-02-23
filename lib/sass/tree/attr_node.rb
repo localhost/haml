@@ -31,7 +31,8 @@ module Sass::Tree
       spaces = '  ' * (tabs - 1)
       to_return = ''
       if !value.empty?
-        to_return << "#{spaces}#{real_name}:#{@style == :compressed ? '' : ' '}#{value};#{join_string}"
+        attr_name = (name == 'raw') ? '' : "#{real_name}:#{' ' unless @style == :compressed}"
+        to_return << ("#{spaces}#{attr_name}#{value};#{join_string}")
       end
       
       children.each do |kid|
